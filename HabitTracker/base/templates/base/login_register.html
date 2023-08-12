@@ -1,0 +1,33 @@
+{% extends 'main.html'%}
+
+{% block content %}
+    {% if page == 'login'%}
+    <div class="cont">
+        <div class="habit-card">
+            <form method="POST", action="">
+                {% csrf_token %}
+                <label>Username:</label>
+                <input type="text" name="username" placeholder="enter username">
+                <label>Password:</label>
+                <input type="password" name="password" placeholder="enter password">
+                <input type="submit" value="Login" class="btn">
+            </form>
+            <p>Haven't signed up yet?</p>
+            <a href="{% url 'register' %}" class="link underline">Sign up</a>
+        </div>
+    </div>
+    {%else%}
+    <div class="cont">
+        <div class="habit-card">
+            <form method="POST", action="">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="Register" class="btn">
+            </form>
+            <p>Already signed up?</p>
+            <a href="{% url 'login' %}" class="link underline">Login</a>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock content %}

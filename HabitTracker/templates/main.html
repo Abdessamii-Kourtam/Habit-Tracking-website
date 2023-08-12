@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <title>Habit Tracker</title>
+    <style>
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        p{
+            font-weight:300;
+        }
+        h3{
+            margin: 0;
+        }
+
+        ul{
+            list-style: none;
+        }
+
+        ul li a{
+            
+            color: white;
+        }
+        body{
+            background-color: #121212;
+            margin: 0;
+            font-size: 1.3rem;
+            font-family: Roboto;
+            color: white;
+        }
+        h5{
+            margin:0;
+        }
+        h6 {
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin:0;
+        }
+        .container{
+            width: 80%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .nav-bar{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .row{
+            padding: 3em 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .main-layout{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .main-layout h5{
+            align-self: center;
+        }
+        nav{
+            background-color:   rgba(40,40,40);
+            color: white;
+            padding: 1em 0;
+        }
+        .nav-bar__col{
+            margin:0;
+            color: white;
+        }
+        .logo{
+            font-size: 1.7rem;
+        }
+
+        .filter{
+            width:10%;
+        }
+        .underline{
+            text-decoration: underline;
+        }
+        .main{
+            width:53%;
+        }
+        .longuest-streak{
+            width:20%;
+        }
+
+        .title{
+            padding: 0 1.5em;
+        }
+        
+
+        .btn{
+            background-color: #00C896;
+            color: white;
+            border-radius: 100px;   
+            padding: 0.5rem 1rem; 
+        }
+
+        .btn:hover, .btn:focus{
+            opacity: 0.75;
+        }
+        .habit-card{
+            margin: 0.75rem 0 2rem 0;
+            padding: 1.5rem;
+            background-color: rgba(40,40,40);
+            color: white;
+            border-radius: 1em;
+        }
+
+        .link{
+            color:white;
+            
+        }
+        .link:hover, .link:focus{
+            opacity: 0.75;
+        }
+
+        .align{
+            display: flex;
+            align-items: center;  
+        }
+        .align p{
+            margin: 0.25em;
+        }
+        .cont{
+            width: 50%;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .submit{
+            margin-top: 2em;
+            margin-left:8em;
+        }
+    </style>
+</head>
+<body>
+    {% include 'nav.html'%}
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% block content%}
+
+    {% endblock %} 
+</body>
+</html>

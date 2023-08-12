@@ -1,0 +1,113 @@
+{% extends 'main.html'%}
+{% block content%}
+<section class="container row">
+<div class="filter">    
+    <h3>Filters:</h3>
+    <div><a href="{% url 'home' %}" class="link underline">All</a></div>
+    <div><a href="{% url 'home' %}?q=Daily" class="link underline">Daily</a></div>
+    <div><a href="{% url 'home' %}?q=Weekly" class="link underline">Weekly</a></div>
+</div>
+<div class="main">
+    {% if request.user.is_authenticated %}
+    <div class="title">
+        <div class="main-layout">
+            <div>
+                <h3>Your Habits:</h3>
+                {%if habit_count == 1%}
+                    <h6>{{habit_count}} habit in total</h6>
+                {%else%}
+                    <h6>{{habit_count}} habits in total</h6>
+                {% endif %}
+            </div>
+            <a href="{% url 'create-habit' %}" class="btn">Create habit</a>
+        </div>
+    </div>
+    {% for habit in habits %}
+    <div class="habit-card">
+        <div class="main-layout">
+            <h3>{{habit.name}}</h3>
+            <div>
+            <a href="{% url 'update-habit' habit.id %}" class="link underline">Edit</a>
+            <a href="{% url 'delete-habit' habit.id %}" class="link underline">Delete</a>
+            </div>
+        </div>
+        <p>{{habit.task}}</p>
+        <hr>
+        <div class="align"><h5>Created:&nbsp&nbsp</h5> <p>{{habit.created}}</p></div>
+        <div class="align"><h5>Last checked:&nbsp&nbsp</h5> <p>{{habit.last_check}}</p></div>
+        {%if habit.periodicity == 'Daily'%}
+        <div class="align"><h5>Current streak:&nbsp&nbsp</h5> <p>{{habit.streak}}{%if habit.streak == 1%} day{%else%} days{%endif%}</p></div>
+        <div class="align"><h5>Longest streak:&nbsp&nbsp</h5> <p>{{habit.longest_streak}}{%if habit.longest_streak == 1%} day{%else%} days{%endif%}</p></div>
+        {%else%}
+        <div class="align"><h5>Current streak:&nbsp&nbsp</h5> <p>{{habit.streak}}{%if habit.streak == 1%} week{%else%} weeks{%endif%}</p></div>
+        <div class="align"><h5>Longest streak:&nbsp&nbsp</h5> <p>{{habit.longest_streak}}{%if habit.longest_streak == 1%} week{%else%} weeks{%endif%}</p></div>
+        {%endif%}
+        <hr>
+        <div class="main-layout">
+            <h5>{{habit.periodicity}}</h5>
+            <a href="{% url 'check-habit' habit.id %}" class="btn">completed</a>
+            
+        </div>
+    </div>
+    {% endfor %}
+
+    {%else%}
+    <div class="title">
+        <div class="main-layout">
+            <div>
+                <h3>Pre-defined Habits</h3>
+                {%if habit_count == 1%}
+                    <h6>{{habit_count}} habit in total</h6>
+                {%else%}
+                    <h6>{{habit_count}} habits in total</h6>
+                {% endif %}
+            </div>
+            <a href="{% url 'create-habit' %}" class="btn">Create habit</a>
+        </div>
+    </div>
+    {% for habit in habits %}
+    <div class="habit-card">
+        <div class="main-layout">
+            <h3>{{habit.name}}</h3>
+            <div>
+            <a href="{% url 'update-habit' habit.id %}" class="link underline">Edit</a>
+            <a href="{% url 'delete-habit' habit.id %}" class="link underline">Delete</a>
+            </div>
+        </div>
+        <p>{{habit.task}}</p>
+        <hr>
+        <div class="align"><h5>Created:&nbsp&nbsp</h5> <p>{{habit.created}}</p></div>
+        <div class="align"><h5>Last checked:&nbsp&nbsp</h5> <p>{{habit.last_check}}</p></div>
+        {%if habit.periodicity == 'Daily'%}
+        <div class="align"><h5>Current streak:&nbsp&nbsp</h5> <p>{{habit.streak}}{%if habit.streak == 1%} day{%else%} days{%endif%}</p></div>
+        <div class="align"><h5>Longest streak:&nbsp&nbsp</h5> <p>{{habit.longest_streak}}{%if habit.longest_streak == 1%} day{%else%} days{%endif%}</p></div>
+        {%else%}
+        <div class="align"><h5>Current streak:&nbsp&nbsp</h5> <p>{{habit.streak}}{%if habit.streak == 1%} week{%else%} weeks{%endif%}</p></div>
+        <div class="align"><h5>Longest streak:&nbsp&nbsp</h5> <p>{{habit.longest_streak}}{%if habit.longest_streak == 1%} week{%else%} weeks{%endif%}</p></div>
+        {%endif%}
+        <hr>
+        <div class="main-layout">
+            <h5>{{habit.periodicity}}</h5>
+            <a href="{% url 'check-habit' habit.id %}" class="btn">completed</a>
+            
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}    
+</div> 
+<div class="longest_streak">
+    <div>
+    <h3>Habit with Max longest streak:</h3>
+    <p>{{MLS_habit.name}}</p>
+    <p>longest streak: {{MLS_habit.longest_streak}}</p>
+    <hr>
+    </div>
+    <div>
+    <h3>Habit with Min longest streak:</h3>
+    <p>{{mls_habit.name}}</p>
+    <p>longest streak: {{mls_habit.longest_streak}}</p>
+    <hr>
+    </div>
+</div>
+</section>
+{% endblock content%}

@@ -1,0 +1,13 @@
+
+<nav>  
+    <div class="container nav-bar">  
+        <div><a href="/" class="nav-bar__col logo link">Habit Tracker</a></div>
+        <ul class="nav-bar__col">
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'logout' %}" class="link">Logout</a></li>
+            {%else%}
+            <li><a href="{% url 'login'%}" class="link">Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
